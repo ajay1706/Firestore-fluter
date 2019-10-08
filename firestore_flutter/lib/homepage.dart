@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:async/async.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,6 +10,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+StreamSubscription<QuerySnapshot> subscription;
+
+List<DocumentSnapshot> snapshot;
+
+CollectionReference collectionReference = Firestore.instance.collection("TopPost");
+
+@override
+  void initState() {
+    
+  
+    subscription  = collectionReference.snapshots().listen((dataSnapshot){
+setState(() {
+  snapshot = dataSnapshot.documents;
+});
+    });
+      super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +78,9 @@ class _HomePageState extends State<HomePage> {
               ListTile(
               title: Text("Close "),
               trailing: Icon(Icons.close,color:Colors.red),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
             )
           ],
         ),
