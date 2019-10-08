@@ -20,6 +20,7 @@ CollectionReference collectionReference = Firestore.instance.collection("TopPost
 @override
   void initState() {
     
+
   
     subscription  = collectionReference.snapshots().listen((dataSnapshot){
 setState(() {
@@ -86,6 +87,48 @@ setState(() {
         ),
       ),
       
+body: ListView(
+  children: <Widget>[
+    Container(
+
+      height: 250,
+      child: ListView.builder(
+        itemCount: snapshot.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index){
+          return Card(
+            margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+            elevation: 10,
+            child: Column(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(snapshot[index].data['url'],
+                  height:180,
+                  width: 180,
+                  fit:BoxFit.cover,
+
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  snapshot[index].data['title']
+                )
+              ],
+            ),
+          );
+
+
+        },
+      ),
+
+
+    )
+  ],
+),
+
     );
   }
 }
