@@ -91,7 +91,7 @@ body: ListView(
   children: <Widget>[
     Container(
 
-      height: 250,
+      height: 200,
       child: ListView.builder(
         itemCount: snapshot.length,
         scrollDirection: Axis.horizontal,
@@ -99,24 +99,31 @@ body: ListView(
           return Card(
             margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
             elevation: 10,
-            child: Column(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(snapshot[index].data['url'],
-                  height:180,
-                  width: 180,
-                  fit:BoxFit.cover,
+            child: Container(
+              margin: EdgeInsets.all(10),
+              child: Column(
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(snapshot[index].data['url'],
+                    height:120,
+                    width: 120,
+                    fit:BoxFit.cover,
 
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  snapshot[index].data['title']
-                )
-              ],
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    snapshot[index].data['title'],
+                    style: TextStyle(color: Colors.red,
+                    fontSize: 18,
+                    ),
+
+                  )
+                ],
+              ),
             ),
           );
 
