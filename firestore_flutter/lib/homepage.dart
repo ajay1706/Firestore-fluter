@@ -47,6 +47,14 @@ class _HomePageState extends State<HomePage> {
               ListTile(
               title: Text("Third Page"),
               leading: Icon(Icons.help,color:Colors.redAccent),
+            ),
+            Divider(
+              height: 10,
+              color: Colors.grey,
+            ),
+              ListTile(
+              title: Text("Close "),
+              trailing: Icon(Icons.close,color:Colors.red),
             )
           ],
         ),
