@@ -18,10 +18,7 @@ List<DocumentSnapshot> snapshot;
 CollectionReference collectionReference = Firestore.instance.collection("TopPost");
 
 @override
-  void initState() {
-    
-
-  
+  void initState() {   
     subscription  = collectionReference.snapshots().listen((dataSnapshot){
 setState(() {
   snapshot = dataSnapshot.documents;
