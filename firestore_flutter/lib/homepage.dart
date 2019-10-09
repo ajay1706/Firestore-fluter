@@ -192,11 +192,11 @@ body: ListView(
                Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: <Widget>[
-                   Icon(Icons.thumb_up),
+                   Icon(Icons.thumb_up,color: Colors.green,),
             
-                   Icon(Icons.share),
+                   Icon(Icons.share,color: Colors.blue,),
              
-                   Icon(Icons.thumb_down)
+                   Icon(Icons.thumb_down,color: Colors.red,)
                  ],
                )
                ],
