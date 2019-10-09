@@ -10,12 +10,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+//For TopPost
 StreamSubscription<QuerySnapshot> subscription;
 
 List<DocumentSnapshot> snapshot;
 
 CollectionReference collectionReference = Firestore.instance.collection("TopPost");
+
+//For body post
+StreamSubscription<QuerySnapshot> sdSubscription;
+List<DocumentSnapshot> sdSnapshot;
+CollectionReference sdCollectionReference = Firestore.instance.collection("BodyPost");
+
+
 
 @override
   void initState() {   
@@ -24,6 +31,14 @@ setState(() {
   snapshot = dataSnapshot.documents;
 });
     });
+sdSubscription = sdCollectionReference.snapshots().listen((sdDataSnapshot){
+  setState(() {
+    sdSnapshot = sdDataSnapshot.documents;
+  });
+
+
+});
+
       super.initState();
   }
 
@@ -129,6 +144,69 @@ body: ListView(
       ),
 
 
+    ),
+
+    Container(
+      height: MediaQuery.of(context).size.height,
+     child: ListView.builder(
+       itemCount: sdSnapshot.length,
+       itemBuilder: (context, index){
+         return Card(
+           elevation: 8,
+           margin: EdgeInsets.all(10),
+           child: Container(
+             padding: EdgeInsets.all(10),
+             child: Column(
+               children: <Widget>[
+                 Row(
+                   children: <Widget>[
+                     CircleAvatar(
+                       
+                       child: Text(sdSnapshot[index].data['title'][0]),
+                       backgroundColor: Colors.redAccent,
+                       foregroundColor: Colors.white,
+                       
+                     ),
+                     SizedBox(width: 10,),
+                     Text(sdSnapshot[index].data['title'],
+                     style: TextStyle(fontSize: 20,color:Colors.black),)
+
+                    
+                   ],
+                 ),
+                 SizedBox(
+                   height:10 ,
+                 ),
+                 Column(
+                   children: <Widget>[
+                   ClipRRect(
+                     
+                     borderRadius: BorderRadius.circular(15),
+                     child: Image.network(sdSnapshot[index].data['url'],
+                     height: 180,
+                     width: MediaQuery.of(context).size.width,
+                     fit: BoxFit.cover,),
+                     
+                   ),
+                   SizedBox(height: 5,),
+                   Row(
+                     children: <Widget>[
+                       Icon(Icons.thumb_up),
+                       SizedBox(width: 4,),
+                       Icon(Icons.share),
+                        SizedBox(width: 4,),
+                       Icon(Icons.thumb_down)
+                     ],
+                   )
+                   ],
+                 )
+               ],
+             ),
+           ),
+
+         );
+       },
+     ),
     )
   ],
 ),
