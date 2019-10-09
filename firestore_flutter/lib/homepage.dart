@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firestore_flutter/detailspage.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,6 +42,13 @@ sdSubscription = sdCollectionReference.snapshots().listen((sdDataSnapshot){
 
       super.initState();
   }
+
+  passData(DocumentSnapshot snap){
+    Navigator.of(context).push(MaterialPageRoute(builder:(context) => DetailPage(snapshot: snap,)));
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -168,8 +176,12 @@ body: ListView(
                    
                  ),
                  SizedBox(width: 10,),
-                 Text(sdSnapshot[index].data['title'],
-                 style: TextStyle(fontSize: 20,color:Colors.black),)
+                 InkWell(
+                                    child: Text(sdSnapshot[index].data['title'],
+                   style: TextStyle(fontSize: 20,color:Colors.black),),
+                 onTap: () => passData(sdSnapshot[index]),
+                 
+                 )
 
                 
                ],
