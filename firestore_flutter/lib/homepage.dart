@@ -191,14 +191,17 @@ body: ListView(
              ),
              Column(
                children: <Widget>[
-               ClipRRect(
-                 
-                 borderRadius: BorderRadius.circular(15),
-                 child: Image.network(sdSnapshot[index].data['url'],
-                 height: 180,
-                 width: MediaQuery.of(context).size.width,
-                 fit: BoxFit.cover,),
-                 
+               Hero(
+                 tag: sdSnapshot[index].data['url'],
+                 child: ClipRRect(
+
+                   borderRadius: BorderRadius.circular(15),
+                   child: Image.network(sdSnapshot[index].data['url'],
+                   height: 180,
+                   width: MediaQuery.of(context).size.width,
+                   fit: BoxFit.cover,),
+
+                 ),
                ),
                SizedBox(height: 10,),
                Row(
