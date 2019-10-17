@@ -46,13 +46,16 @@ class _DetailPageState extends State<DetailPage> {
           ),
           Container(
             margin: EdgeInsets.all(10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(widget.snapshot.data['url'],
-              height: 240,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,),
-            
+            child: Hero(
+              tag: widget.snapshot.data['url'],
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(widget.snapshot.data['url'],
+                height: 240,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,),
+
+              ),
             ),
           )
         ],
